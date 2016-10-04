@@ -1,13 +1,144 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400" rel="stylesheet">
+    <link rel="stylesheet" href="app/dist/style.css">
+    <script src="app/dist/vendor.js"></script>
+</head>
+
+<body>
+    <section id="settingapp">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <span class="navbar-brand">Application form</span>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <div class="navbar-right">
+                        <button type="button" class="btn btn-default" id="edit-open">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="modal fade bs-example-modal-lg" id="modal-open" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <nav class="navbar navbar-default modal-nav-bar">
+                        <div class="container-fluid">
+                            <span>Edit</span>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="#" id="close">Cansel</a></li>
+                                <li><a href="#" id="save">Save</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                    <form id="edit-user">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" required="" class="setting-edit" id="userName" value="{{ user.userName }}">
+                                <label for="input" class="control-label">User Name</label>
+                                <i class="bar"></i>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" required="" class="setting-edit" id="userEmail" value="{{ user.userEmail }}">
+                                <label for="input" class="control-label">Email</label>
+                                <i class="bar"></i>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="setting-edit" id="userPhone" value="{{ user.userPhone }}" required="">
+                                <label for="input" class="control-label">Phone number</label>
+                                <i class="bar"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="date" class="setting-edit" id="userBirthday" required="">
+                                <label for="input" class="control-label">Birthdate</label>
+                                <i class="bar"></i>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="setting-edit" id="userUrl" value="{{ user.siteUrl }}" required="">
+                                <label for="input" class="control-label">URL</label>
+                                <i class="bar"></i>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <input type="text" class="setting-edit" id="userSkill" value="{{ user.userSkill }}" required="">
+                                    <label for="input" class="control-label">Skill number</label>
+                                    <i class="bar"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-radio">
+                                    <div class="radio col-md-6">
+                                        <label>
+                                            <input class="gender" type="radio" name="gender" value="0">
+                                            <i class="helper"></i>
+                                            male
+                                          </label>
+                                    </div>
+                                    <div class="radio col-md-6">
+                                        <label>
+                                            <input class="gender" type="radio" name="gender" value="1">
+                                            <i class="helper"></i>
+                                            female
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input type="password" class="setting-edit" id="password" value="{{ user.password}}" required="">
+                            <label for="input" class="control-label">Password</label>
+                            <i class="bar"></i>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input type="password" class="setting-edit" id="password-confirm" value="{{ user.password}}" required="">
+                            <label for="input" class="control-label">Repeat Password</label>
+                            <i class="bar"></i>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <textarea class="setting-edit" id="userAbout">{{ user.userAbout }}</textarea>
+                            <label class="control-label" for="textarea">Enter a brief description of yourself and interest</label>
+                            <i class="bar"></i>
+                        </div>
+                        {{ form_widget(form._token) }}
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div class="view">
+            <div class="col-md-3 setting-container">
+                <h3>{{ user.userName }}</h3>
+                <div>18.02.1993</div>
+                <div>{{ user.userEmail }}</div>
+            </div>
+            <div class="col-md-8 setting-container">
+                <div class="col-md-4 user-info">
+                    <div>{{ user.siteUrl }}</div>
+                    <div>{{ user.userPhone }}</div>
+                    <div>Skill {{ user.userSkill }}</div>
+                    <div>Male</div>
+                </div>
+                <div class="col-md-8">
+                    <div>{{ user.userAbout }}</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="app/dist/app.js"></script>
+</body>
+
 </html>

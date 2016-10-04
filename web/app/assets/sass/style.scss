@@ -1,0 +1,309 @@
+@import "bootstrap";
+@import "bootstrap/theme";
+$border-grey: #e1e1e1;
+$border-blue: #63b4e4;
+$grey-font: #e1e1e1;
+$blue-font: #63b4e4;
+$primary-color: #fafafb;
+$primary-font-color: #4a4a4a;
+$mf-font-size: 16px !default;
+$mf-active-font-size: $mf-font-size;
+$mf-active-top: -$mf-font-size !default;
+$mf-gap: $mf-font-size * 1.5 !default;
+$mf-spacer: $mf-font-size / 8 !default;
+$mf-fieldset-margin: 0 0 $mf-gap * 2 !default;
+$mf-checkbox-gap: $mf-font-size * 2 !default;
+$mf-radio-margin: $mf-font-size / -4 !default;
+$mf-input-color: #333 !default;
+$mf-border-color: #999 !default;
+$mf-label-color: lighten($mf-border-color, 10%) !default;
+$mf-active-color: darken($mf-border-color, 10%) !default;
+$mf-focus-color: #337ab7 !default;
+$mf-error-color: #d9534f !default;
+$mf-transition-speed: 0.28s !default;
+
+body {
+    font-family: 'Raleway', sans-serif;
+    background: $primary-color;
+}
+
+#settingapp {
+    display: inline-block;
+    padding: 10px;
+}
+
+.view {
+    display: inline-flex;
+}
+
+.navbar-default {
+    background-image: none;
+    background: $primary-color;
+    border-radius: 0;
+    box-shadow: none;
+    border: 0;
+    border-bottom: 1px solid $border-grey;
+    padding: 35px 0;
+}
+
+.navbar-default {
+    .navbar-brand {
+        font-size: 35px;
+        color: $primary-font-color;
+    }
+
+    .btn-default {
+        background: white;
+        border: 0;
+        padding: 5px 40px;
+        border-radius: 15px;
+        box-shadow: none;
+    }
+
+    .navbar-right {
+        padding-top: 10px;
+    }
+}
+
+.view {
+    .setting-container {
+        background: white;
+        padding: 10px;
+        line-height: 1.75;
+        color: $primary-font-color;
+    }
+
+    .col-md-8.setting-container {
+        margin-left: auto;
+    }
+
+    .col-md-3.setting-container {
+        div,
+        h3 {
+            font-weight: 100;
+        }
+    }
+
+    .user-info {
+        text-align: right;
+    }
+}
+
+.modal-nav-bar {
+    padding: 0;
+    background: white;
+}
+
+.modal-content {
+  display: inline-block;
+  padding-bottom: 20px;
+}
+
+#edit-user {
+  padding: 10px;
+}
+
+.modal-nav-bar {
+    .container-fluid {
+        text-align: center;
+    }
+
+    span {
+        padding-top: 15px;
+        display: inline-block;
+        font-size: 25px;
+    }
+
+    ul.nav.navbar-nav.navbar-right {
+        padding: 5px 0;
+    }
+
+    ul {
+        li:first-child {
+            border-right: 1px solid $border-grey;
+        }
+    }
+}
+
+.form-group {
+  padding-left: 0;
+}
+
+.form-group,
+.form-radio {
+    position: relative;
+    margin-top: ($mf-gap * 1.5);
+    margin-bottom: ($mf-gap * 1.5);
+}
+
+.form-group {
+    input {
+        height: ($mf-font-size * 1.9);
+    }
+
+    textarea {
+        resize: none;
+    }
+
+    .control-label {
+        position: absolute;
+        top: ($mf-font-size / 4);
+        pointer-events: none;
+        padding-left: $mf-spacer;
+        z-index: 1;
+        color: $mf-label-color;
+        font-size: $mf-font-size;
+        font-weight: normal;
+        transition: all $mf-transition-speed ease;
+    }
+
+    .bar {
+        position: relative;
+        border-bottom: ($mf-font-size / 16) solid $mf-border-color;
+        display: block;
+
+        &::before {
+            content: '';
+            height: ($mf-font-size / 8);
+            width: 0;
+            left: 50%;
+            bottom: ($mf-font-size / -16);
+            position: absolute;
+            background: $mf-focus-color;
+            transition: left $mf-transition-speed ease, width $mf-transition-speed ease;
+            z-index: 2;
+        }
+    }
+
+    input,
+    textarea {
+        display: block;
+        background: none;
+        padding: $mf-spacer $mf-spacer ($mf-spacer / 2);
+        font-size: $mf-font-size;
+        border-width: 0;
+        border-color: transparent;
+        line-height: 1.9;
+        width: 100%;
+        color: transparent;
+        transition: all $mf-transition-speed ease;
+        box-shadow: none;
+    }
+
+    input[type="file"] {
+        line-height: 1;
+
+        ~ .bar {
+            display: none;
+        }
+    }
+
+    input:focus,
+    input:valid,
+    textarea:focus,
+    textarea:valid {
+        color: $mf-input-color;
+
+        ~ .control-label {
+            font-size: $mf-active-font-size;
+            color: $mf-active-color;
+            top: $mf-active-top;
+            left: 0;
+        }
+    }
+
+    input,
+    textarea {
+        &:focus {
+            outline: none;
+
+            ~ .control-label {
+                color: $mf-focus-color;
+            }
+
+            ~ .bar {
+                &::before {
+                    width: 100%;
+                    left: 0;
+                }
+            }
+        }
+    }
+}
+
+.form-radio {
+    label {
+        position: relative;
+        cursor: pointer;
+        padding-left: $mf-checkbox-gap;
+        text-align: left;
+        color: $mf-input-color;
+        display: block;
+    }
+
+    input {
+        width: auto;
+        opacity: 0.00000001;
+        position: absolute;
+        left: 0;
+    }
+}
+
+.radio {
+    margin-bottom: $mf-font-size;
+
+    .helper {
+        position: absolute;
+        top: $mf-radio-margin;
+        left: $mf-radio-margin;
+        cursor: pointer;
+        display: block;
+        font-size: $mf-font-size;
+        user-select: none;
+        color: $mf-border-color;
+
+        &::after,
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            margin: ($mf-spacer * 2);
+            width: $mf-font-size;
+            height: $mf-font-size;
+            transition: transform $mf-transition-speed ease;
+            border-radius: 50%;
+            border: ($mf-font-size / 8) solid currentColor;
+        }
+
+        &::after {
+            transform: scale(0);
+            background-color: $mf-focus-color;
+            border-color: $mf-focus-color;
+        }
+    }
+
+    label:hover .helper {
+        color: $mf-focus-color;
+    }
+
+    input:checked {
+        ~ .helper {
+            &::after {
+                transform: scale(0.5);
+            }
+
+            &::before {
+                color: $mf-focus-color;
+            }
+        }
+    }
+}
+
+.form-group, .form-radio {
+  margin-bottom: 0;
+}
+
+.radio + .radio {
+    margin-top: 10px;
+}
